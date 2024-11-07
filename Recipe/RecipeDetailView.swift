@@ -13,22 +13,68 @@ struct RecipeDetailView: View {
     let frameSize: CGFloat = 300
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             Text("Cuisine: \(recipe.cuisine)")
                 .font(.headline)
                 .foregroundColor(.secondary)
-            if let urlBig = recipe.photoURLLarge {
-                CachedAsyncImage(url: urlBig, frameSize: frameSize)
-            } else {
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(width: frameSize, height: frameSize)
+            Group {
+                if let urlBig = recipe.photoURLLarge {
+                    CachedAsyncImage(url: urlBig, frameSize: frameSize)
+                } else {
+                    Rectangle()
+                        .fill(Color.gray)
+                }
             }
-            Spacer()
+            .frame(width: frameSize, height: frameSize)
+
+            HStack(spacing: 16) {
+                        // Check if youtubeURL is available, if so, display the button
+                if let youtubeURL = recipe.youtubeURL {
+                            Button(action: {
+                                openURL(youtubeURL)
+                            }) {
+                                HStack {
+                                    Image(systemName: "play.fill")
+                                        .foregroundColor(.white)
+                                    Text("Youtube")
+                                        .foregroundColor(.white)
+                                }
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(8)
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+
+                        // Check if websiteURL is available, if so, display the button
+                if let websiteURL = recipe.sourceURL {
+                            Button(action: {
+                                openURL(websiteURL)
+                            }) {
+                                HStack {
+                                    Image(systemName: "globe")
+                                        .foregroundColor(.white)
+                                    Text("Website")
+                                        .foregroundColor(.white)
+                                }
+                                .padding()
+                                .background(Color.blue)
+                                .cornerRadius(8)
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    }
+                    .padding(16)
         }
         .padding()
         .navigationTitle(recipe.name)
     }
+    
+    private func openURL(_ url: URL) {
+          if UIApplication.shared.canOpenURL(url) {
+              UIApplication.shared.open(url)
+          }
+      }
 }
 
 // Preview for RecipeRow
@@ -46,5 +92,7 @@ struct RecipeDetailView_Previews: PreviewProvider {
         )
         .environment(\.imageCache, ImageCache())
     }
+        
+
 }
 

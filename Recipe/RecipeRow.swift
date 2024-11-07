@@ -14,13 +14,17 @@ struct RecipeRow: View {
 
     var body: some View {
         HStack {
-            if let urlSmall = recipe.photoURLSmall {
-                CachedAsyncImage(url: urlSmall, frameSize: frameSize)
-            } else {
-                Rectangle()
-                    .fill(Color.gray)
-                    .frame(width: frameSize, height: frameSize)
+            Group {
+                if let urlSmall = recipe.photoURLSmall {
+                    CachedAsyncImage(url: urlSmall, frameSize: frameSize)
+                } else {
+                    Rectangle()
+                        .fill(Color.gray)
+                }
             }
+            .frame(width: frameSize, height: frameSize)
+            .cornerRadius(8)
+            .padding(8)
 
             VStack(alignment: .leading) {
                 Text(recipe.name)
