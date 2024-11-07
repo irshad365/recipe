@@ -24,9 +24,17 @@ struct RecipeListView: View {
                         .progressViewStyle(CircularProgressViewStyle())
                 } else {
                     if viewModel.recipes.isEmpty {
-                        Text("Error Loading data! Please swipe down to refresh. \(viewModel.errorMessage ?? "")")
+                        Text("Error Loading data! \(viewModel.errorMessage ?? "")")
                             .font(.title2)
                             .foregroundColor(.gray)
+                        Button {
+                            Task {
+                                await viewModel.fetchRecipes()
+                            }
+                        } label: {
+                            Text("Refresh")
+                        }
+
                     }
                     List(viewModel.recipes, id: \.id, selection: $selectedRecipe) { recipe in
                         RecipeRow(recipe: recipe)

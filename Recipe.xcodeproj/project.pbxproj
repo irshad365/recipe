@@ -21,6 +21,7 @@
 		E6DF15DD2CDC562900F367F6 /* RecipeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF15DC2CDC562900F367F6 /* RecipeListView.swift */; };
 		E6DF15DF2CDC571500F367F6 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF15DE2CDC571400F367F6 /* ImageCache.swift */; };
 		E6DF15E12CDC57DB00F367F6 /* RecipeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF15E02CDC57DB00F367F6 /* RecipeRow.swift */; };
+		E6FFC9462CDD5F850002FC8C /* CachedAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FFC9452CDD5F850002FC8C /* CachedAsyncImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E6DF15DC2CDC562900F367F6 /* RecipeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListView.swift; sourceTree = "<group>"; };
 		E6DF15DE2CDC571400F367F6 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E6DF15E02CDC57DB00F367F6 /* RecipeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRow.swift; sourceTree = "<group>"; };
+		E6FFC9452CDD5F850002FC8C /* CachedAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAsyncImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				E6DF15D22CDC549600F367F6 /* Recipe.swift */,
+				E6FFC9452CDD5F850002FC8C /* CachedAsyncImage.swift */,
 				E6DF15D42CDC549700F367F6 /* RecipeDataManager.swift */,
 				E6DF15DE2CDC571400F367F6 /* ImageCache.swift */,
 				E6DF15D32CDC549600F367F6 /* RecipeViewModel.swift */,
@@ -287,6 +290,7 @@
 				E6DF15DF2CDC571500F367F6 /* ImageCache.swift in Sources */,
 				E6DF15A82CDC53CC00F367F6 /* RecipeApp.swift in Sources */,
 				E6DF15E12CDC57DB00F367F6 /* RecipeRow.swift in Sources */,
+				E6FFC9462CDD5F850002FC8C /* CachedAsyncImage.swift in Sources */,
 				E680E8DF2CDD472200F550DA /* RecipeDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

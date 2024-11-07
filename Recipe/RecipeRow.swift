@@ -10,37 +10,18 @@ import SwiftUI
 struct RecipeRow: View {
     let recipe: Recipe
     @Environment(\.imageCache) var imageCache
-    
+    let frameSize: CGFloat = 80
+
     var body: some View {
         HStack {
             if let urlSmall = recipe.photoURLSmall {
-                if let cachedImage = imageCache.getImage(for: urlSmall.absoluteString) {
-                    cachedImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 80, height: 80)
-                } else {
-                    AsyncImage(url: urlSmall) { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                        case .success(let image):
-                            cacheAndRender(image: image, url: urlSmall.absoluteString)
-                        case .failure:
-                            Image(systemName: "photo")
-                                .resizable()
-                                .scaledToFit()
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
+                CachedAsyncImage(url: urlSmall, frameSize: frameSize)
             } else {
                 Rectangle()
                     .fill(Color.gray)
-                    .frame(width: 80, height: 80)
+                    .frame(width: frameSize, height: frameSize)
             }
-            
+
             VStack(alignment: .leading) {
                 Text(recipe.name)
                     .font(.headline)
@@ -50,16 +31,9 @@ struct RecipeRow: View {
             .padding(.leading, 10)
         }
     }
-    
-    func cacheAndRender(image: Image, url: String) -> some View {
-        imageCache.saveImage(image, for: url)
-        return image
-            .resizable()
-            .scaledToFit()
-            .frame(width: 80, height: 80)
-    }
 }
 
+// Preview for RecipeRow
 struct RecipeRow_Previews: PreviewProvider {
     static var previews: some View {
         RecipeRow(recipe:
@@ -73,6 +47,5 @@ struct RecipeRow_Previews: PreviewProvider {
                           )
         )
         .environment(\.imageCache, ImageCache())
-            
     }
 }
