@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E680E8DF2CDD472200F550DA /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E680E8DE2CDD472100F550DA /* RecipeDetailView.swift */; };
 		E6DF15A82CDC53CC00F367F6 /* RecipeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6DF15A72CDC53CC00F367F6 /* RecipeApp.swift */; };
 		E6DF15AC2CDC53D700F367F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DF15AB2CDC53D700F367F6 /* Assets.xcassets */; };
 		E6DF15B02CDC53D700F367F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6DF15AF2CDC53D700F367F6 /* Preview Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E680E8DE2CDD472100F550DA /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		E6DF15A42CDC53CC00F367F6 /* Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Recipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6DF15A72CDC53CC00F367F6 /* RecipeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeApp.swift; sourceTree = "<group>"; };
 		E6DF15AB2CDC53D700F367F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				E6DF15D32CDC549600F367F6 /* RecipeViewModel.swift */,
 				E6DF15A72CDC53CC00F367F6 /* RecipeApp.swift */,
 				E6DF15DC2CDC562900F367F6 /* RecipeListView.swift */,
+				E680E8DE2CDD472100F550DA /* RecipeDetailView.swift */,
 				E6DF15E02CDC57DB00F367F6 /* RecipeRow.swift */,
 				E6DF15AB2CDC53D700F367F6 /* Assets.xcassets */,
 				E6DF15AD2CDC53D700F367F6 /* Recipe.entitlements */,
@@ -284,6 +287,7 @@
 				E6DF15DF2CDC571500F367F6 /* ImageCache.swift in Sources */,
 				E6DF15A82CDC53CC00F367F6 /* RecipeApp.swift in Sources */,
 				E6DF15E12CDC57DB00F367F6 /* RecipeRow.swift in Sources */,
+				E680E8DF2CDD472200F550DA /* RecipeDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

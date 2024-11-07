@@ -7,6 +7,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 class RecipeViewModel: ObservableObject {
     
     private var dataManager: DataManager
@@ -31,22 +32,5 @@ class RecipeViewModel: ObservableObject {
         }
         isLoading = false
     }
-    
-    func loadImage(from imageURL: URL) async -> UIImage? {
-        let url = imageURL.absoluteString
-        // Check the cache first
-        if let cachedImage = await imageCache.getImage(for: url) {
-            return cachedImage
-        }
-                
-        // Download the image if it's not cached
-        guard let (data, _) = try? await URLSession.shared.data(from: imageURL),
-              let image = UIImage(data: data) else {
-            return nil
-        }
-        
-        // Save the image to the cache
-        await imageCache.saveImage(image, for: url)
-        return image
-    }
+
 }

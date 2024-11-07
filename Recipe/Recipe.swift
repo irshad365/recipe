@@ -7,7 +7,7 @@ struct RecipeCollection: Codable {
 }
 
 /// A model representing a recipe with all its details.
-struct Recipe: Codable, Identifiable {
+struct Recipe: Codable, Identifiable, Hashable {
     /// Enumeration for JSON keys to map properties to the correct keys in JSON data.
     enum CodingKeys: String, CodingKey {
         case cuisine, name

@@ -9,16 +9,32 @@ import SwiftUI
 
 struct RecipeRow: View {
     let recipe: Recipe
-    @EnvironmentObject var viewModel: RecipeViewModel
-    @State private var recipeImage: UIImage? = nil
+    @Environment(\.imageCache) var imageCache
     
     var body: some View {
         HStack {
-            if let image = recipeImage {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
+            if let urlSmall = recipe.photoURLSmall {
+                if let cachedImage = imageCache.getImage(for: urlSmall.absoluteString) {
+                    cachedImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 80, height: 80)
+                } else {
+                    AsyncImage(url: urlSmall) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            cacheAndRender(image: image, url: urlSmall.absoluteString)
+                        case .failure:
+                            Image(systemName: "photo")
+                                .resizable()
+                                .scaledToFit()
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                }
             } else {
                 Rectangle()
                     .fill(Color.gray)
@@ -33,18 +49,30 @@ struct RecipeRow: View {
             }
             .padding(.leading, 10)
         }
-        .task {
-            if let photoURL = recipe.photoURLSmall {
-                recipeImage = await viewModel.loadImage(from: photoURL)
-            }
-        }
+    }
+    
+    func cacheAndRender(image: Image, url: String) -> some View {
+        imageCache.saveImage(image, for: url)
+        return image
+            .resizable()
+            .scaledToFit()
+            .frame(width: 80, height: 80)
     }
 }
 
-
 struct RecipeRow_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeRow(recipe: Recipe(cuisine: "cuisine", name: "name", photoURLLarge: nil, photoURLSmall: nil, id: UUID(), sourceURL: nil, youtubeURL: nil))
-            .environmentObject(RecipeViewModel(dataManager: MockNetworkDataManager([])))
+        RecipeRow(recipe:
+                    Recipe(cuisine: "Malaysian",
+                           name: "Apam Balik",
+                           photoURLLarge: URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/large.jpg"),
+                           photoURLSmall: URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/b9ab0071-b281-4bee-b361-ec340d405320/small.jpg"),
+                           id: UUID(),
+                           sourceURL: URL(string: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ"),
+                           youtubeURL: URL(string: "https://www.youtube.com/watch?v=6R8ffRRJcrg")
+                          )
+        )
+        .environment(\.imageCache, ImageCache())
+            
     }
 }
